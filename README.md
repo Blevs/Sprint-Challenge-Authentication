@@ -30,7 +30,7 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 1. What is the purpose of using _sessions_?
 
-A session is a way of uniquely identifying a clients interactions with our
+A session is a way of uniquely identifying a client's interactions with our
 service over a period of time. This lets us associate data with this specific
 instance, like if a user is logged in, other interactions they make, or data we
 don't want to pull from a database on every request.
@@ -46,7 +46,11 @@ the password hash without ever knowing its contents.
 
 1. What does bcrypt do to slow down attackers?
 
-Bcrypt is not designed to be fast, and often will be applied a number of times to continually re-hash the results of the last encryption. This artificially inflates the amount of time neccessary to brute force a password by checking the results of hashing, or even just trying to log in a bunch of times (though that is a job for a rate limiter).
+Bcrypt is not designed to be fast, and often will be applied a number of times
+to continually re-hash the results of the last encryption. This artificially
+inflates the amount of time neccessary to brute force a password by checking the
+results of hashing, or even just trying to log in a bunch of times (though that
+is a job for a rate limiter).
 
 1. What are the three parts of the JSON Web Token?
 
