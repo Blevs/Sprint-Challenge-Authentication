@@ -2,7 +2,7 @@ const axios = require('axios');
 const bcrypt = require('bcrypt');
 const db = require('../database/dbConfig.js');
 
-const { authenticate } = require('../auth/authenticate');
+const { authenticate, generateToken } = require('../auth/authenticate');
 
 module.exports = server => {
   server.post('/api/register', register);
@@ -29,6 +29,21 @@ function register(req, res) {
 }
 
 function login(req, res) {
+  const creds = req.body;
+  db('users')
+    .where({username: creds.username})
+    .first()
+    .then(user => {
+      if (user && bcrypt.compareSync(creds.password, user.password)) {
+        const token = generateToken(user);
+        res.status(200).json({token});
+      } else {
+        res.status(401).json({
+          message: "Invalid credentials"
+        });
+      }
+    })
+    .catch(() => res.status(401).json({message: "Invalid credentials"}));
 }
 
 
