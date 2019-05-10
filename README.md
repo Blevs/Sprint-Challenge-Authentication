@@ -29,9 +29,32 @@ Implement an User Authentication System in order to access the jokes from the Jo
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 1. What is the purpose of using _sessions_?
+
+A session is a way of uniquely identifying a clients interactions with our
+service over a period of time. This lets us associate data with this specific
+instance, like if a user is logged in, other interactions they make, or data we
+don't want to pull from a database on every request.
+
 1. What does bcrypt do to help us store passwords in a secure manner.
+
+Bcrypt is a cryptograpghically secure hashing algorithm. This means it is one
+way encryption. When given a secret and a string, it produces a hash. Unlike
+other types of encryption, when given the secret and the hash it is impossible
+to recover the original string. The only way to know what the contents of the
+original string is to hash it and compare the results. This allows us to store
+the password hash without ever knowing its contents.
+
 1. What does bcrypt do to slow down attackers?
+
+Bcrypt is not designed to be fast, and often will be applied a number of times to continually re-hash the results of the last encryption. This artificially inflates the amount of time neccessary to brute force a password by checking the results of hashing, or even just trying to log in a bunch of times (though that is a job for a rate limiter).
+
 1. What are the three parts of the JSON Web Token?
+
+A JWT is a base64 encoded string that is composed of three parts. A header,
+where information about the tokens encoding is stored. A payload, where the
+tokens information is stored. And a signature, which is a hash of the tokens
+other components and a secret which allows the server to verify the tokens
+contents have not been modified.
 
 ## Project Set Up
 
